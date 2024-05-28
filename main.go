@@ -23,7 +23,10 @@ func main() {
 	gin.SetMode(mode)
 
 	router := gin.Default()
+	//POST
 	router.POST("/api/v1/mail/pgp", controller.PgpHandler)
+	//GET
+	router.GET("/health", controller.HealthCheckHandler)
 
 	// Define the server address
 	addr := ":8080"
@@ -47,6 +50,7 @@ func printStartupInfo(addr, mode string) {
 	fmt.Println("======================================")
 	fmt.Println("API Endpoints:")
 	fmt.Println("  POST /api/v1/mail/pgp")
+	fmt.Println("  GET  /health")
 	fmt.Println("======================================")
 	fmt.Println("Server is starting... Press CTRL+C to stop.")
 	fmt.Println("======================================")
