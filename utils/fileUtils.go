@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/ProtonMail/gopenpgp/v2/helper"
-
 	"github.com/halra/mailra/domain"
 )
 

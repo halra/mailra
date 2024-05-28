@@ -50,11 +50,10 @@ func SendEmailInline(attachments []domain.EncryptedAttachment, mr domain.MailReq
 	m.SetHeader("To", mr.To)
 	m.SetHeader("Subject", mr.Subject)
 
-	body := mr.BodyText + "\n\nPlease find the encrypted files below:\n\n"
+	body := mr.BodyText + "\n\n"
 	for _, attachment := range attachments {
-		body += fmt.Sprintf("-----BEGIN PGP MESSAGE-----\n\n%s\n-----END PGP MESSAGE-----\n\n", attachment.Content)
+		body += fmt.Sprintf("%s\n\n", attachment.Content)
 	}
-
 	m.SetBody("text/plain", body)
 
 	return SendEmail(m, mr)
