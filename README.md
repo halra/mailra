@@ -49,9 +49,9 @@ Ensure you have the necessary environment variables set up for your SMTP server 
     - `smtpPassword`: SMTP server password
     - `smtpUser`: SMTP server user
     - `method`: Email sending method (`inline` or `mime`)
-    - `publicKey`: PGP public key for encryption
+    - `publicKey`: PGP public key for encryption (-----BEGIN PGP PUBLIC KEY BLOCK-----)
     - `bodyText`: Body text of the email
-    - Files: Files to be encrypted and sent
+    - `files`: Files to be encrypted and sent
 
 ### Example cURL Command
 
@@ -65,49 +65,11 @@ curl -X POST http://localhost:8080/api/v1/mail/pgp \
   -F "smtpPassword=yourpassword" \
   -F "smtpUser=youruser" \
   -F "method=mime" \
-  -F "publicKey=@path/to/publicKey.asc" \
+  -F "publicKey=-----BEGIN PGP PUBLIC KEY BLOCK-----" \
   -F "bodyText=Please find the encrypted files attached." \
   -F "files=@path/to/file1.txt" \
   -F "files=@path/to/file2.txt"
 ```
-
-## Functions
-
-### `pgpHandler`
-
-Handles the main logic for receiving the form data, processing the files, encrypting them, and sending the email.
-
-### `processFiles`
-
-Processes multiple files, encrypting each one using the provided PGP public key.
-
-### `processFile`
-
-Handles the encryption of a single file.
-
-### `encryptPGP`
-
-Encrypts data using the provided PGP public key.
-
-### `sendEmailMIME`
-
-Sends an email with encrypted attachments as MIME.
-
-### `sendEmailInline`
-
-Sends an email with encrypted attachments inline.
-
-### `sendEmail`
-
-Handles the actual sending of the email.
-
-### `createTempFilePath`
-
-Creates a temporary file path for storing encrypted attachments.
-
-### `logAndRespond`
-
-Logs a message and sends an HTTP response.
 
 ## License
 
