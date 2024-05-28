@@ -27,6 +27,9 @@ jobs:
     - name: Build
       run: GOOS=linux GOARCH=amd64 go build -v ./...
       
+    - name: ls file 
+      run: ls -la
+      
     - name: Rename file 
       run: mv mailra mailra_linux_amd64
 
