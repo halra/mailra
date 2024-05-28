@@ -28,7 +28,7 @@ jobs:
       run: GOOS=linux GOARCH=amd64 go build -v ./...
       
     - name: Rename file 
-      run: mv fileMigrationTool mailra_linux_amd64
+      run: mv mailra mailra_linux_amd64
 
     - name: Build
       run: GOOS=darwin GOARCH=arm64 go build -v ./...
