@@ -8,7 +8,7 @@ import (
 
 	"gopkg.in/gomail.v2"
 
-	"mailra/domain"
+	"github.com/halra/mailra/domain"
 )
 
 func SendEmailMIME(attachments []domain.EncryptedAttachment, mr domain.MailRequest) error {
