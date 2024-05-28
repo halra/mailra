@@ -45,7 +45,7 @@ func printStartupInfo(addr, mode string) {
 	fmt.Println("            Server Startup            ")
 	fmt.Println("======================================")
 	fmt.Printf("Time: %s\n", time.Now().Format(time.RFC1123))
-	fmt.Printf("Version: %s\n", "0.0.1")
+	fmt.Printf("Version: %s\n", "v0.0.1")
 	fmt.Printf("Address: %s\n", addr)
 	fmt.Printf("Environment: %s\n", mode)
 	fmt.Println("======================================")
