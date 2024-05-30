@@ -30,7 +30,7 @@ p6S/Nw==
 */
 func TestCheckKeyExpiration(t *testing.T) {
 	// Generate a test key with no expiration (or a very long expiration date)
-	rsaKey, _ := crypto.GenerateKey("", "hi@go.com", "rsa", 2048)
+	rsaKey, _ := crypto.GenerateKey("", "hi@example.com", "rsa", 2048)
 	publicKey, err := rsaKey.GetArmoredPublicKey()
 
 	// Test with a non-expired key

@@ -69,7 +69,7 @@ func handleConnection(conn net.Conn) {
 
 // StartMockSmtpServer starts the mock SMTP server and listens for a stop signal.
 func StartMockSmtpServer(stop chan struct{}) {
-	listenAddr := ":1025"
+	listenAddr := ":30666"
 	listener, err := net.Listen("tcp", listenAddr)
 	if err != nil {
 		log.Fatalf("Failed to start server: %v", err)

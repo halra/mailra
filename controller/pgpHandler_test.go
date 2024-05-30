@@ -28,7 +28,7 @@ func TestMain(m *testing.M) {
 
 func TestPgpHandler(t *testing.T) {
 
-	rsaKey, _ := crypto.GenerateKey("", "hi@go.com", "rsa", 2048)
+	rsaKey, _ := crypto.GenerateKey("", "hi@example.com", "rsa", 2048)
 	publicKey, _ := rsaKey.GetArmoredPublicKey()
 
 	time.Sleep(3 * time.Second)
@@ -50,7 +50,7 @@ func TestPgpHandler(t *testing.T) {
 	writer.WriteField("to", "rarichn@gmail.com")
 	writer.WriteField("subject", "Test Subject")
 	writer.WriteField("smtPServer", "localhost")
-	writer.WriteField("smtpPort", "1025")
+	writer.WriteField("smtpPort", "30666")
 	writer.WriteField("smtpPassword", "password")
 	writer.WriteField("smtpUser", "user")
 	writer.WriteField("method", "mime")
@@ -94,7 +94,7 @@ func TestPgpHandler(t *testing.T) {
 
 func TestPgpHandlerInline(t *testing.T) {
 
-	rsaKey, _ := crypto.GenerateKey("", "hi@go.com", "rsa", 2048)
+	rsaKey, _ := crypto.GenerateKey("", "hi@example.com", "rsa", 2048)
 	publicKey, _ := rsaKey.GetArmoredPublicKey()
 
 	time.Sleep(3 * time.Second)
@@ -116,7 +116,7 @@ func TestPgpHandlerInline(t *testing.T) {
 	writer.WriteField("to", "rarichn@gmail.com")
 	writer.WriteField("subject", "Test Subject")
 	writer.WriteField("smtPServer", "localhost")
-	writer.WriteField("smtpPort", "1025")
+	writer.WriteField("smtpPort", "30666")
 	writer.WriteField("smtpPassword", "password")
 	writer.WriteField("smtpUser", "user")
 	writer.WriteField("method", "inline")

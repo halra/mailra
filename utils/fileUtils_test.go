@@ -63,7 +63,7 @@ func createMultipartFileHeader(t *testing.T, content string) (*multipart.FileHea
 
 func TestProcessFiles(t *testing.T) {
 	// Create a test PGP public key for encryption
-	rsaKey, _ := crypto.GenerateKey("", "hi@go.com", "rsa", 2048)
+	rsaKey, _ := crypto.GenerateKey("", "hi@example.com", "rsa", 2048)
 	publicKey, err := rsaKey.GetArmoredPublicKey()
 	if err != nil {
 		t.Fatal(err)
