@@ -12,21 +12,22 @@ import (
 	"gopkg.in/gomail.v2"
 )
 
-var stop = make(chan struct{})
-
 // TestMain sets up the test environment and runs the tests.
 func TestMain(m *testing.M) {
+	var stop = make(chan struct{})
 	go test.StartMockSmtpServer(stop)
 	time.Sleep(3 * time.Second)
 	code := m.Run()
 	close(stop)
+	time.Sleep(3 * time.Second)
 	os.Exit(code)
+
 }
 
 func TestSendEmailMIME(t *testing.T) {
 
 	// Create a test PGP public key for encryption
-	rsaKey, _ := crypto.GenerateKey("", "hi@go.com", "rsa", 2048)
+	rsaKey, _ := crypto.GenerateKey("", "hi@example.com", "rsa", 2048)
 	publicKey, err := rsaKey.GetArmoredPublicKey()
 	assert.NoError(t, err)
 

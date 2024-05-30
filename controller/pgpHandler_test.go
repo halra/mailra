@@ -15,14 +15,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var stop = make(chan struct{})
-
 // TestMain sets up the test environment and runs the tests.
 func TestMain(m *testing.M) {
+	var stop = make(chan struct{})
 	go test.StartMockSmtpServer(stop)
 	time.Sleep(3 * time.Second)
 	code := m.Run()
 	close(stop)
+	time.Sleep(3 * time.Second)
 	os.Exit(code)
 }
 
@@ -47,7 +47,7 @@ func TestPgpHandler(t *testing.T) {
 
 	// Add form fields
 	writer.WriteField("from", "test@example.com")
-	writer.WriteField("to", "rarichn@gmail.com")
+	writer.WriteField("to", "test@example.com")
 	writer.WriteField("subject", "Test Subject")
 	writer.WriteField("smtPServer", "localhost")
 	writer.WriteField("smtpPort", "30666")
@@ -113,7 +113,7 @@ func TestPgpHandlerInline(t *testing.T) {
 
 	// Add form fields
 	writer.WriteField("from", "test@example.com")
-	writer.WriteField("to", "rarichn@gmail.com")
+	writer.WriteField("to", "test@example.com")
 	writer.WriteField("subject", "Test Subject")
 	writer.WriteField("smtPServer", "localhost")
 	writer.WriteField("smtpPort", "30666")
