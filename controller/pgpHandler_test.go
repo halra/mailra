@@ -17,7 +17,7 @@ import (
 
 // TestMain sets up the test environment and runs the tests.
 func TestMain(m *testing.M) {
-	var stop = make(chan struct{})
+	var stop = make(chan interface{})
 	go test.StartMockSmtpServer(stop)
 	time.Sleep(3 * time.Second)
 	code := m.Run()
