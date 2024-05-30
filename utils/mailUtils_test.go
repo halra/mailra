@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"fmt"
+	"math/rand"
 	"os"
 	"testing"
 	"time"
@@ -12,10 +14,12 @@ import (
 	"gopkg.in/gomail.v2"
 )
 
+var randomPort = rand.Intn(38000-31000+1) + 31000
+
 // TestMain sets up the test environment and runs the tests.
 func TestMain(m *testing.M) {
 	var stop = make(chan interface{})
-	go test.StartMockSmtpServer(stop)
+	go test.StartMockSmtpServer(stop, fmt.Sprintf(":%d", randomPort))
 	time.Sleep(3 * time.Second)
 	code := m.Run()
 	close(stop)
@@ -36,7 +40,7 @@ func TestSendEmailMIME(t *testing.T) {
 		To:           "recipient@example.com",
 		Subject:      "Test Subject",
 		SmtPServer:   "localhost",
-		SmtpPort:     "30666",
+		SmtpPort:     fmt.Sprintf("%d", randomPort),
 		SmtpPassword: "password",
 		SmtpUser:     "user",
 		Method:       "mime",
@@ -65,7 +69,7 @@ func TestSendEmailInline(t *testing.T) {
 		To:           "recipient@example.com",
 		Subject:      "Test Subject",
 		SmtPServer:   "localhost",
-		SmtpPort:     "30666",
+		SmtpPort:     fmt.Sprintf("%d", randomPort),
 		SmtpPassword: "password",
 		SmtpUser:     "user",
 		Method:       "inline",
@@ -102,7 +106,7 @@ func TestSendEmail(t *testing.T) {
 		To:           "recipient@example.com",
 		Subject:      "Test Subject",
 		SmtPServer:   "localhost",
-		SmtpPort:     "30666",
+		SmtpPort:     fmt.Sprintf("%d", randomPort),
 		SmtpPassword: "password",
 		SmtpUser:     "user",
 	}

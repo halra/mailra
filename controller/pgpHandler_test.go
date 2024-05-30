@@ -2,6 +2,8 @@ package controller
 
 import (
 	"bytes"
+	"fmt"
+	"math/rand"
 	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
@@ -15,10 +17,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+var randomPort = rand.Intn(38000-31000+1) + 31000
+
 // TestMain sets up the test environment and runs the tests.
 func TestMain(m *testing.M) {
 	var stop = make(chan interface{})
-	go test.StartMockSmtpServer(stop)
+	go test.StartMockSmtpServer(stop, fmt.Sprintf(":%d", randomPort))
 	time.Sleep(3 * time.Second)
 	code := m.Run()
 	close(stop)
@@ -50,7 +54,7 @@ func TestPgpHandler(t *testing.T) {
 	writer.WriteField("to", "test@example.com")
 	writer.WriteField("subject", "Test Subject")
 	writer.WriteField("smtPServer", "localhost")
-	writer.WriteField("smtpPort", "30666")
+	writer.WriteField("smtpPort", fmt.Sprintf("%d", randomPort))
 	writer.WriteField("smtpPassword", "password")
 	writer.WriteField("smtpUser", "user")
 	writer.WriteField("method", "mime")
@@ -116,7 +120,7 @@ func TestPgpHandlerInline(t *testing.T) {
 	writer.WriteField("to", "test@example.com")
 	writer.WriteField("subject", "Test Subject")
 	writer.WriteField("smtPServer", "localhost")
-	writer.WriteField("smtpPort", "30666")
+	writer.WriteField("smtpPort", fmt.Sprintf("%d", randomPort))
 	writer.WriteField("smtpPassword", "password")
 	writer.WriteField("smtpUser", "user")
 	writer.WriteField("method", "inline")
