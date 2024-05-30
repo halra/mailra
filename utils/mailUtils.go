@@ -8,15 +8,21 @@ import (
 
 	"gopkg.in/gomail.v2"
 
+	"github.com/ProtonMail/gopenpgp/v2/helper"
 	"github.com/halra/mailra/domain"
 )
 
 func SendEmailMIME(attachments []domain.EncryptedAttachment, mr domain.MailRequest) error {
+
+	bodyText, err := helper.EncryptMessageArmored(mr.PublicKey, mr.BodyText)
+	if err != nil {
+		return fmt.Errorf("failed to EncryptMessageArmored : %w", err)
+	}
 	m := gomail.NewMessage()
 	m.SetHeader("From", mr.From)
 	m.SetHeader("To", mr.To)
 	m.SetHeader("Subject", mr.Subject)
-	m.SetBody("text/plain", mr.BodyText)
+	m.SetBody("text/plain", bodyText)
 
 	for _, attachment := range attachments {
 		fp := CreateTempFilePath(attachment.Filename)
