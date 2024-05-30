@@ -11,6 +11,14 @@ import (
 	"github.com/halra/mailra/controller"
 )
 
+/*
+TODOS:
+2. add storage for private keys
+3. add s/mime support
+4. Add even more cool mail stuff ? :)
+5. add testing
+*/
+
 func main() {
 
 	// Set the Gin mode based on the environment variable, default to "debug"

@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ProtonMail/gopenpgp/v2/helper"
 	"github.com/halra/mailra/domain"
 )
 
@@ -37,7 +36,7 @@ func processFile(file *multipart.FileHeader, publicKey string) (domain.Encrypted
 		return domain.EncryptedAttachment{}, fmt.Errorf("failed to read file: %w", err)
 	}
 
-	encryptedContent, err := encryptPGP(fileContent, publicKey)
+	encryptedContent, err := EncryptPGP(fileContent, publicKey)
 	if err != nil {
 		return domain.EncryptedAttachment{}, fmt.Errorf("failed to encrypt file: %w", err)
 	}
@@ -46,14 +45,6 @@ func processFile(file *multipart.FileHeader, publicKey string) (domain.Encrypted
 		Filename: file.Filename,
 		Content:  encryptedContent,
 	}, nil
-}
-
-func encryptPGP(data []byte, publicKey string) ([]byte, error) {
-	encryptedData, err := helper.EncryptBinaryMessageArmored(publicKey, data)
-	if err != nil {
-		return nil, fmt.Errorf("failed to encrypt message: %w", err)
-	}
-	return []byte(encryptedData), nil
 }
 
 func CreateTempFilePath(filename string) string {

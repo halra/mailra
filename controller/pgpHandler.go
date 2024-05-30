@@ -41,10 +41,10 @@ func PgpHandler(c *gin.Context) {
 
 	if mr.Method == "inline" {
 		log.Println("Sending email with inline attachments")
-		err = utils.SendEmailInline(attachments, mr)
+		err = utils.SendPgpEmailInline(attachments, mr)
 	} else {
 		log.Println("Sending email with MIME attachments")
-		err = utils.SendEmailMIME(attachments, mr)
+		err = utils.SendPgpEmailMIME(attachments, mr)
 	}
 
 	if err != nil {
